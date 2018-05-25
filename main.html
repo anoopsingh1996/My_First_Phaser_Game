@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edyst</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+        <script type="text/javascript">
+// set minutes
+var mins = 2;
+ 
+// calculate the seconds (don't change this! unless time progresses at a different speed for you...)
+var secs = mins * 60;
+function countdown() {
+    setTimeout('Decrement()',1000);
+}
+function Decrement() {
+    if (document.getElementById) {
+        minutes = document.getElementById("minutes");
+        seconds = document.getElementById("seconds");
+        // if less than a minute remaining
+        if (seconds < 59) {
+            seconds.value = secs;
+        } else {
+            minutes.value = getminutes();
+            seconds.value = getseconds();
+        }
+        secs--;
+        setTimeout('Decrement()',1000);
+    }
+}
+function getminutes() {
+    // minutes is seconds divided by 60, rounded down
+    mins = Math.floor(secs / 60);
+    return mins;
+}
+function getseconds() {
+    // take mins remaining (as seconds) away from total seconds remaining
+    return secs-Math.round(mins *60);
+}
+</script>
+        <script type="text/javascript" src="js/phaser.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        
+        <style>
+            body {
+                padding: 0px;
+                margin: 0px;             
+                }
+            .bottomleft {
+                 position: absolute;
+                   bottom: 30px;
+                     left: 16px;
+                font-size: 18px;
+                 }
+            .bottomright {
+                position: fixed;
+                  bottom: 0px;
+                   right: 0px;
+               }
+            .button {
+                     background-color: #4CAF50;
+                     border: none;
+                     color: red;
+                     padding: 15px 32px;
+                     text-align: center;
+                     text-decoration: none;
+                     display: inline-block;
+                     font-size: 16px;
+                     margin: 4px 2px;
+                     cursor: pointer;
+                  }
+
+        </style>
+    </head>
+    <body> 
+    <div id="timer">
+    <font color="green">Timer:</font> <input id="minutes" type="text" style="width: 14px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> minutes and <input id="seconds" type="text" style="width: 26px; border: none; background-color:none; font-size: 16px; font-weight: bold;">seconds.
+    <font color="red" size="4" >Level 1</font>
+</div>
+<div class="bottomleft">Score</div>
+<div class="bottomright"><button type="button" id="myButton" class="button">END GAME</button></div>
+<script>
+countdown();
+</script> 
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "index.html";
+    };
+</script>      
+    </body>
+</html>
